@@ -443,7 +443,7 @@ function fChj {
 		CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
                 fi
                 if [ "$fullText" == "full" ]
-		then
+			then
 		  ts=$(date +%s%N)
 		  echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}/v1/query/height")
                   echo "Round trip to Pocket in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
@@ -460,10 +460,458 @@ function fChj {
 		if [ "$fullText" == "full" ]
 		then
 		  ts=$(date +%s%N)
-		  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]})
+		  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
                   echo "Round trip to ETH in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
 		fi
 	  ;;
+          0023 ) 
+                  EthROBlockHeight=""
+                EthROBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]}  | grep -Po '((?<=result":.)|(?<=result":."))([^",\r\n]+)(?=[",\r\n]*)')
+                if [ "$EthROBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to ETH Ropsten in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0024 ) 
+                  EthKOBlockHeight=""
+                EthKOBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]}  | grep -Po '((?<=result":.)|(?<=result":."))([^",\r\n]+)(?=[",\r\n]*)')
+                if [ "$EthKOBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to ETH Kovan in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0025 ) 
+                  EthRBlockHeight=""
+                EthRBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]}  | grep -Po '((?<=result":.)|(?<=result":."))([^",\r\n]+)(?=[",\r\n]*)')
+                if [ "$EthRBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to ETH Rinkeby in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0026 ) 
+                  EthGBlockHeight=""
+                EthGBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":5}' ${CurCHU[$i]}  | grep -Po '((?<=result":.)|(?<=result":."))([^",\r\n]+)(?=[",\r\n]*)')
+                if [ "$EthGBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}" -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' | jq .result)
+                  echo "Round trip to ETH Goerli in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0028 ) 
+		  EthartrBlockHeight=""
+                EthartrBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params",:[],"id":64}' ${CurCHU[$i]})
+                if [ "$EthartrBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to ETH-Archive-Trace in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0022 ) 
+                  EtharARBlockHeight=""
+                EtharARBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params",:[],"id":64}' ${CurCHU[$i]})
+                if [ "$EtharARBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to ETH-Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0052 ) 
+                  NEARBlockHeight=""
+                NEARBlockHeight=$(curl -s "${CurCHU[$i]}/status" | jq .sync_info.latest_block_height)
+                if [ "$NEARBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}/status" | jq .sync_info.latest_block_height)
+                  echo "Round trip to NEAR in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0009 ) 
+                  MATICBlockHeight=""
+                MATICBlockHeight=$(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}')
+                if [ "$MATICBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to POLYGON in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          000B ) 
+                  MATICABlockHeight=""
+                MATICABlockHeight=$(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}')
+                if [ "$MATICBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to POLYGON Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0046 ) 
+                  EVBlockHeight=""
+                EVBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$EVBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Evmos in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0005 ) 
+                  FUSEBlockHeight=""
+                FUSEBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$FUSEBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to FUSE in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          000A ) 
+                  FUSEABlockHeight=""
+                FUSEABlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$FUSEABlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to FUSE Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0047 ) 
+                  OKEXBlockHeight=""
+                OKEXBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$OKEXBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to *OkEx* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0053 ) 
+                  OPTBlockHeight=""
+                OPTBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$OPTBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Optimism in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0040 ) 
+                  HMBlockHeight=""
+                HMBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$HMBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Harmony One in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0044 )
+                  IOTEXBlockHeight=""
+                IOTEXBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'  ${CurCHU[$i]})
+                if [ "$IOTEXBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to *IoTeX* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0048 ) 
+                  BOBBlockHeight=""
+                BOBBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$BOBBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to *Boba* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0049 ) 
+                  FANBlockHeight=""
+                FANBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$FANBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Fantom in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0051 ) 
+                  MRBlockHeight=""
+                MRBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$MRBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' | jq .result)
+                  echo "Round trip to MoonRiver in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0050 ) 
+                  MORBlockHeight=""
+                MORBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' ${CurCHU[$i]})
+                if [ "$MORBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' | jq .result)
+                  echo "Round trip to MoonBEAM in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          03DF ) 
+                  DFBlockHeight=""
+                DFBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$DFBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to DFKchain Subnet in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          000C ) 
+                  GNABlockHeight=""
+                GNABlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$GNABlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Gnosis Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0027 ) 
+                  GNBlockHeight=""
+                GNBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$GNBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Gnosis in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          000F ) 
+                  PMUMBlockHeight=""
+                PMUMBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$PMUMBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Polygon Mumbai in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0010 ) 
+                  BSCABlockHeight=""
+                BSCABlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$BSCABlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Binance SC Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0006 ) 
+                  SOLBlockHeight=""
+                SOLBlockHeight=$(curl -s -m 3 -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1, "method":"getBlockHeight"}' ${CurCHU[$i]})
+                if [ "$SOLBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1, "method":"getBlockHeight"}' | jq .result)
+                  echo "Round trip to Solana in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0004 ) 
+                  BSCBlockHeight=""
+                BSCBlockHeight=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$BSCBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to Binance SC in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0003 ) 
+                  AVVER=""
+                AVVER=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$AVVER" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq .result)
+                  echo "Round trip to AVX in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
 	  esac
         done
 }
