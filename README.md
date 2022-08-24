@@ -36,7 +36,7 @@ Version 9.C  2020/09/28
 Install instructions:  It is a single bash script with no dependencies.
 copy paste the commands below:
 
-
+```
 cd ~  
 sudo apt install jq git
 git clone https://github.com/BenVanGithub/pokt-rokt.git  
@@ -45,3 +45,4 @@ chmod 755 ./*.sh
 cd ~  
 cp ~/pokt-rokt/rokt.sh ~  
 ./rokt.sh  
+```
