@@ -33,6 +33,10 @@ Version 9.C  2020/09/28
 - several display field size adjustments
 - other minor display fixes
 
+Version 9.D  2022/08/24
+- added relay chains
+- added jq functionality to reduce output
+
 Install instructions:  It is a single bash script with no dependencies.
 copy paste the commands below:
 
