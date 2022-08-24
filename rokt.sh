@@ -443,7 +443,7 @@ function fChj {
 		CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
                 fi
                 if [ "$fullText" == "full" ]
-			then
+		then
 		  ts=$(date +%s%N)
 		  echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}/v1/query/height")
                   echo "Round trip to Pocket in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
@@ -574,6 +574,22 @@ function fChj {
                   ts=$(date +%s%N)
                   echo $(curl -s "${CurCHU[$i]}/status" | jq .sync_info.latest_block_height)
                   echo "Round trip to NEAR in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0054 ) 
+                  OSMOBlockHeight=""
+                OSMOBlockHeight=$(curl -s ${CurCHU[$i]}/block)
+                if [ "OSMOBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s ${CurCHU[$i]}/block | jq .result.block.header.height)
+                  echo "Round trip to Osmosis in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
           0009 ) 
@@ -910,6 +926,22 @@ function fChj {
                   ts=$(date +%s%N)
                   echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq .result)
                   echo "Round trip to AVX in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
+                fi
+          ;;
+          0056 ) 
+                  KlAYBlockHeight=""
+                KlAYBlockHeight=t=$(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]})
+                if [ "$KlAYBlockHeight" != "" ]
+                then
+                CurCHJ[$i]="${GRN}${CurCHJ[$i]}${NC}"
+                else
+                CurCHJ[$i]="${RED}${CurCHJ[$i]}${NC}"
+                fi
+                if [ "$fullText" == "full" ]
+                then
+                  ts=$(date +%s%N)
+                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  echo "Round trip to Klaytn in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
 	  esac
@@ -1414,3 +1446,4 @@ done
     createMenuStrings
     initWindow
     main
+
