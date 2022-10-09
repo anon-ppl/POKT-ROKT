@@ -445,6 +445,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
 		then
 		  ts=$(date +%s%N)
+          printf \n 
+          printf \n 
 		  echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}/v1/query/height")
                   echo "Round trip to Pocket in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
 		fi
@@ -476,7 +478,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH Ropsten in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -492,7 +495,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH Kovan in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -508,7 +512,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH Rinkeby in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -524,7 +529,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}" -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' | jq .result)
+                  result=$(echo $(curl -s -m 2 -XPOST "${CurCHU[$i]}" -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH Goerli in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -540,7 +546,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH-Archive-Trace in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -556,7 +563,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":64}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to ETH-Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -604,7 +612,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to POLYGON in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -620,7 +629,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to POLYGON Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -636,7 +646,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Evmos in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -652,7 +663,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to FUSE in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -668,7 +680,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to FUSE Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -684,7 +697,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to *OkEx* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -700,7 +714,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Optimism in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -716,7 +731,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Harmony One in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -732,7 +748,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to *IoTeX* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -748,7 +765,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to *Boba* in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -764,7 +782,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Fantom in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -780,7 +799,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to MoonRiver in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -796,7 +816,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to MoonBEAM in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -812,7 +833,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to DFKchain Subnet in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -828,7 +850,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Gnosis Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -844,7 +867,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Gnosis in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -860,7 +884,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Polygon Mumbai in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -876,7 +901,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Binance SC Archive in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -892,7 +918,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1, "method":"getBlockHeight"}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1, "method":"getBlockHeight"}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Solana in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -908,7 +935,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Binance SC in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -924,7 +952,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq .result)
+                  result=$(echo $(curl -s -m 3 POST --insecure -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' ${CurCHU[$i]} | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to AVX in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
@@ -940,7 +969,8 @@ function fChj {
                 if [ "$fullText" == "full" ]
                 then
                   ts=$(date +%s%N)
-                  echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq .result)
+                  result=$(echo $(curl -s "${CurCHU[$i]}" -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' | jq -r .result))
+                  printf "%d\n" $result
                   echo "Round trip to Klaytn in mili-seconds: $((($(date +%s%N) - $ts)/1000000))"
                 fi
           ;;
